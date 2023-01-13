@@ -1,0 +1,17 @@
+{
+  "name": "p6-backend",
+  "version": "1.0.0",
+  "description": "API Rest HotTakes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cyrgui496",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
