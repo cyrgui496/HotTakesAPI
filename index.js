@@ -1,7 +1,9 @@
 const express = require("express")
-var cors = require('cors')
+const cors = require('cors')
+const path = require('path');
 const mongoose = require("mongoose")
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user')
+const sauceRoutes = require('./routes/sauce')
 
 // Connection of db
 const username = "cyrgui496";
@@ -15,14 +17,10 @@ mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.${dbname}.mongo
 const app = express()
 
 app.use(express.json())
-app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 app.use(cors())
 
 app.use('/api/auth', userRoutes)
+app.use('/api', sauceRoutes)
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
-/*
-app.post('/api/auth/signup', (req, res) => {
-    res.json(req.body)
-})
-*/
 app.listen(3000)
