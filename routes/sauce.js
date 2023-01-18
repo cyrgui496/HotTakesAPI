@@ -9,16 +9,8 @@ const sauceCtrl = require('../controllers/sauce')
 router.post('/sauces', auth, multer, sauceCtrl.createSauce)
 router.get('/sauces', auth, sauceCtrl.getAllSauces)
 router.get('/sauces/:id', auth, sauceCtrl.getOneSauce)
-
-/*
-    
-
-    router.get('/api/sauces', auth, sauceCtrl.etc)
-    router.get('/api/sauces/:id', auth, sauceCtrl.etc)
-    router.post('/api/sauces', auth, multer, sauceCtrl.etc)
-    router.put('/api/sauces/:id', auth, multer, sauceCtrl.etc)
-    router.delete('/api/sauces/:id', auth, sauceCtrl.etc)
-    router.post('/api/sauces/:id/like', auth, sauceCtrl.etc)
-*/
+router.put('/sauces/:id', auth, multer, sauceCtrl.modifySauce)
+router.delete('/sauces/:id', auth, sauceCtrl.deleteSauce)
+router.post('/sauces/:id/like', auth, sauceCtrl.likeSauce)
 
 module.exports = router
