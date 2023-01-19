@@ -3,8 +3,7 @@ const fs = require('fs')
 
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce)
-    delete sauceObject._id
-    delete sauceObject._userId
+
     const sauce = new Sauce({
         ...sauceObject,
         userId: req.auth.userId,
@@ -97,44 +96,32 @@ exports.likeSauce = (req, res, next) => {
             _id: req.params.id
         })
         .then((sauce) => {
-            function managementOfLikeAndDislike() {
-                const like = req.body.like
-                if (like == 1) {
-                    sauce.likes += 1
-                    sauce.usersLiked.push(req.auth.userId)
+            const like = req.body.like
+            if (like == 1) {
+                sauce.likes += 1
+                sauce.usersLiked.push(req.auth.userId)
 
-                } else if (like == -1) {
-                    sauce.dislikes += 1
-                    sauce.usersDisliked.push(req.auth.userId)
-                } else {
-                    console.log("test")
-                    if (sauce.usersLiked.includes(req.auth.userId)) {
-                        sauce.likes -= 1
-                        const indexOfUsersLiked = sauce.usersLiked.indexOf(req.auth.userId);
-                        if (indexOfUsersLiked !== -1) {
-                            sauce.usersLiked.splice(indexOfUsersLiked, 1);
-                        }
+            } else if (like == -1) {
+                sauce.dislikes += 1
+                sauce.usersDisliked.push(req.auth.userId)
+            } else {
+                console.log("test")
+                if (sauce.usersLiked.includes(req.auth.userId)) {
+                    sauce.likes -= 1
+                    const indexOfUsersLiked = sauce.usersLiked.indexOf(req.auth.userId);
+                    if (indexOfUsersLiked !== -1) {
+                        sauce.usersLiked.splice(indexOfUsersLiked, 1);
                     }
-                    if (sauce.usersDisliked.includes(req.auth.userId)) {
-                        sauce.dislikes -= 1
-                        const indexOfUsersDisliked = sauce.usersDisliked.indexOf(req.auth.userId);
-                        if (indexOfUsersDisliked !== -1) {
-                            sauce.usersDisliked.splice(indexOfUsersDisliked, 1);
-                        }
+                }
+                if (sauce.usersDisliked.includes(req.auth.userId)) {
+                    sauce.dislikes -= 1
+                    const indexOfUsersDisliked = sauce.usersDisliked.indexOf(req.auth.userId);
+                    if (indexOfUsersDisliked !== -1) {
+                        sauce.usersDisliked.splice(indexOfUsersDisliked, 1);
                     }
                 }
             }
-            managementOfLikeAndDislike()
-            console.log(sauce)
             sauce.save()
-                // Sauce.updateOne({
-                //         _id: req.params.id
-                //     }, {
-                //         likes : sauce.likes,
-                //         dislikes : sauce.dislikes,
-                //         usersLiked : sauce.usersLiked,
-                //         usersDisliked : sauce.usersDisliked
-                //     })
                 .then(() => res.status(200).json({
                     message: 'Sauce modifié!'
                 }))
