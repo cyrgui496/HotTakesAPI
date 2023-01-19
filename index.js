@@ -1,16 +1,14 @@
 const express = require("express")
 const cors = require('cors')
 const path = require('path');
+const dotenv = require('dotenv')
 const mongoose = require("mongoose")
 const userRoutes = require('./routes/user')
 const sauceRoutes = require('./routes/sauce')
 
 // Connection of db
-const username = "cyrgui496";
-const password = "6HvrMOdeBPdmJxdN"
-const cluster = "cluster0.b3yw5in"
-const dbname = "b3yw5in"
-mongoose.connect(`mongodb+srv://${username}:${password}@cluster0.${dbname}.mongodb.net/?retryWrites=true&w=majority`)
+dotenv.config()
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.${process.env.DB_NAME}.mongodb.net/?retryWrites=true&w=majority`)
         .then(() => console.log("Connected at MongoDB"))
         .catch((err) => console.log("Not connected at MongoDB", err))
 
