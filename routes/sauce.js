@@ -2,15 +2,16 @@ const express = require("express")
 const router = express.Router()
 
 const auth = require('../middleware/auth')
-const multer = require('../middleware/multer-config');
+const multer = require('../middleware/multer-config')
+const isOwner = require('../middleware/is-owner')
 
 const sauceCtrl = require('../controllers/sauce')
 
 router.post('/sauces', auth, multer, sauceCtrl.createSauce)
 router.get('/sauces', auth, sauceCtrl.getAllSauces)
 router.get('/sauces/:id', auth, sauceCtrl.getOneSauce)
-router.put('/sauces/:id', auth, multer, sauceCtrl.modifySauce)
-router.delete('/sauces/:id', auth, sauceCtrl.deleteSauce)
+router.put('/sauces/:id', auth, isOwner, multer, sauceCtrl.modifySauce)
+router.delete('/sauces/:id', auth, isOwner, sauceCtrl.deleteSauce)
 router.post('/sauces/:id/like', auth, sauceCtrl.likeSauce)
 
 module.exports = router
