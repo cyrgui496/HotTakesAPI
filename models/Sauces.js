@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') // Mongoose is a MongoDB object modeling tool
 
+// we create mongoose model sauceShema
 const sauceSchema = mongoose.Schema({
   userId: { type: String, required: true },
   name: { type: String, required: true },
@@ -14,4 +15,5 @@ const sauceSchema = mongoose.Schema({
   usersDisliked : [String]
 })
 
+// we export mongoose model sauceShema
 module.exports = mongoose.model('Sauce', sauceSchema)
