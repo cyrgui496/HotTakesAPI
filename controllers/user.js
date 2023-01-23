@@ -1,6 +1,8 @@
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt') // A library to hash passwords
+// To secure our routes we use the JSON Web Token (JWT) which is a standard method for the exchange of secure data
+const jwt = require('jsonwebtoken')
 
+// inclusion of Users model
 const User = require('../models/Users')
 
 exports.signup = (req, res, next) => {

@@ -1,4 +1,6 @@
+// inclusion of Sauces model
 const Sauce = require('../models/Sauces')
+// The Node.js file system module allows to work with the file system on my computer
 const fs = require('fs')
 
 exports.createSauce = (req, res, next) => {

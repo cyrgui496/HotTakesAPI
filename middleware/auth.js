@@ -1,3 +1,4 @@
+// To secure our routes we use the JSON Web Token (JWT) which is a standard method for the exchange of secure data
 const jwt = require('jsonwebtoken')
 
 module.exports = (req, res, next) => {
