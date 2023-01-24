@@ -21,7 +21,7 @@ app.use(cors())
 // use routes
 app.use('/api/auth', userRoutes)
 app.use('/api', sauceRoutes)
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 // We run the app on port 3000
 app.listen(3000)

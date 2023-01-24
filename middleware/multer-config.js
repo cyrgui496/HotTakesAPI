@@ -1,11 +1,11 @@
 // Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files
-const multer = require('multer');
+const multer = require('multer')
 
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
   'image/png': 'png'
-};
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {

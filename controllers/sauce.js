@@ -97,6 +97,7 @@ exports.likeSauce = (req, res, next) => {
             _id: req.params.id
         })
         .then((sauce) => {
+            // management of likes and dislikes
             const like = req.body.like
             if (like == 1) {
                 sauce.likes += 1
