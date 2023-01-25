@@ -14,7 +14,7 @@ router.post('/sauces', auth, multer, sauceCtrl.createSauce)
 router.get('/sauces', auth, sauceCtrl.getAllSauces)
 router.get('/sauces/:id', auth, sauceCtrl.getOneSauce)
 router.put('/sauces/:id', auth, isOwner, multer, sauceCtrl.modifySauce)
-router.delete('/sauces/:id', auth, isOwner, sauceCtrl.deleteSauce)
+router.delete('/sauces/:id', auth, isOwner, multer, sauceCtrl.deleteSauce)
 router.post('/sauces/:id/like', auth, sauceCtrl.likeSauce)
 
 // We export const router

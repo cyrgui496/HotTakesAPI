@@ -60,7 +60,11 @@ exports.modifySauce = (req, res, next) => {
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : {
         ...req.body
-    };
+    }
+
+    const filename = req.sauce.imageUrl.split('/images/')[1];
+    fs.unlink(`images/${filename}`, () => {
+
     Sauce.updateOne({
                 _id: req.params.id
             },
@@ -72,7 +76,7 @@ exports.modifySauce = (req, res, next) => {
         .catch(error => res.status(401).json({
             error
         }))
-
+    })
 }
 
 exports.deleteSauce = (req, res, next) => {
