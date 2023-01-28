@@ -10,7 +10,6 @@ This API use node.js.
 ***
 A little intro about the installation and run API.
 ```
-$ cd p6-backEnd
 $ npm install
 $ npx nodemon index
 ```
