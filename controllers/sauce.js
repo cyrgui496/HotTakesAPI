@@ -3,6 +3,7 @@ const Sauce = require('../models/Sauces')
 // The Node.js file system module allows to work with the file system on my computer
 const fs = require('fs')
 
+// we make possible the creation of sauce
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce)
 
@@ -24,6 +25,7 @@ exports.createSauce = (req, res, next) => {
         })
 }
 
+// we make possible the diplaying all sauces
 exports.getAllSauces = (req, res, next) => {
     Sauce.find().then(
         (sauces) => {
@@ -38,6 +40,7 @@ exports.getAllSauces = (req, res, next) => {
     )
 }
 
+// we make possible the diplaying of a sauce
 exports.getOneSauce = (req, res, next) => {
     Sauce.findOne({
         _id: req.params.id
@@ -54,6 +57,7 @@ exports.getOneSauce = (req, res, next) => {
     )
 }
 
+// we make possible the modification of a sauce
 exports.modifySauce = (req, res, next) => {
     const sauceObject = req.file ? {
         ...JSON.parse(req.body.sauce),
@@ -79,6 +83,7 @@ exports.modifySauce = (req, res, next) => {
     })
 }
 
+// we make possible the delation of a sauce
 exports.deleteSauce = (req, res, next) => {
     const filename = req.sauce.imageUrl.split('/images/')[1];
     fs.unlink(`images/${filename}`, () => {
@@ -96,6 +101,7 @@ exports.deleteSauce = (req, res, next) => {
     })
 }
 
+// we make possible the management of likes and dislikes
 exports.likeSauce = (req, res, next) => {
     Sauce.findOne({
             _id: req.params.id
